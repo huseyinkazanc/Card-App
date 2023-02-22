@@ -1,4 +1,4 @@
-import {Stack,Container, Button, Input, Textarea } from "@mantine/core";
+import {Stack,Container,Grid, Button, Input, Textarea } from "@mantine/core";
 import "./App.css";
 import CardComponent from "./components/card/İndex";
 import { useState } from "react";
@@ -29,34 +29,51 @@ let arr = [
 //const kare = (sayi) => sayi * sayi;
 
 const App = () => {
+  const [title,setTitle] = useState("");
+  const [paragraf,SetParagraf] = useState("");
+  const [list , setList] = useState(arr)
   const [val, setVal] = useState(11);
+  const click = () => {
+    setTitle("");
+    SetParagraf("");
+    const copyList = [...list];
+    copyList.push({
+      id: 5,
+      title,
+      par: paragraf,
+    });
+    setList(copyList);
+  }
   return (
     <Container>
     
       <h1>Kart Oluşturma Programı</h1>
       <Stack>
       <Input.Wrapper label="Başlık">
-        <Input label="Başlık" placeholder="Başlık yazınız..." />
+        <Input label="Başlık" placeholder="Başlık yazınız..."  value={title} onChange={(e)=>setTitle(e.target.value)}/>
       </Input.Wrapper>
 
       <Textarea
         placeholder="Paragraf yazınız..."
         label="Paragraf"
+        value={paragraf} onChange={(e)=>SetParagraf(e.target.value)}  
       />
-      <Button variant="outline" >Kart Oluştur</Button>
+      <Button variant="outline"  onClick={click} >Kart Oluştur</Button>
       </Stack>
       <h2>Kartlar:</h2>
-      <div className="Cards">
-        {arr.map(({ id, title, par }, i) => (
-          <CardComponent
-            key={`index ${i}`}
+      <Grid>
+        {list.map(({ id, title, par }, i) => (
+          <Grid.Col span={4} key={`index ${i}`}>
+             <CardComponent
             title={title}
-            par={par}
+            par={par}         
             lesson={val}
             index={i}
           />
+          </Grid.Col>
+         
         ))}
-      </div>
+      </Grid>
     </Container>
   );
 };
