@@ -1,6 +1,6 @@
 import "./Card.css";
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
-const CardComponent = ({title,par,lesson,index}) => (
+import { Card,CloseButton, Image, Text, Badge, Button, Group } from '@mantine/core';
+const CardComponent = ({title,par,index,click}) => (
   <Card shadow="sm" p="lg" radius="md" withBorder>
   <Card.Section>
     <Image
@@ -14,13 +14,13 @@ const CardComponent = ({title,par,lesson,index}) => (
     <Text weight={500}>{title}</Text>
     <Badge color="pink" variant="light">
       On Sale
-    </Badge>
+    </Badge><CloseButton aria-label="Close modal" onClick={click} />
   </Group>
 
   <Text size="sm" color="dimmed">
     {par}
   </Text>
-
+  
   <Button variant="light" color="blue" fullWidth mt="md" radius="md">
     Book classic tour now
   </Button>

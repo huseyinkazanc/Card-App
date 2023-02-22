@@ -29,6 +29,8 @@ let arr = [
 //const kare = (sayi) => sayi * sayi;
 
 const App = () => {
+
+ 
   const [title,setTitle] = useState("");
   const [paragraf,SetParagraf] = useState("");
   const [list , setList] = useState(arr)
@@ -36,13 +38,11 @@ const App = () => {
   const click = () => {
     setTitle("");
     SetParagraf("");
-    const copyList = [...list];
-    copyList.push({
+    setList([...list,{
       id: 5,
       title,
       par: paragraf,
-    });
-    setList(copyList);
+    }]);
   }
   return (
     <Container>
@@ -66,9 +66,13 @@ const App = () => {
           <Grid.Col span={4} key={`index ${i}`}>
              <CardComponent
             title={title}
-            par={par}         
-            lesson={val}
+            par={par}
             index={i}
+            click={()=>{
+              let copyList = [...list];
+              copyList.splice(i,1);
+              setList(copyList);
+            }}
           />
           </Grid.Col>
          
